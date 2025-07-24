@@ -1,0 +1,19 @@
+import java.util.Random;
+
+public class Ejercicio1c {
+    public static void main(String[] args) {
+        Random rand = new Random();
+        int suma = 0;
+        while (suma <= 25) {
+            int numero = rand.nextInt(11);
+            System.out.print("Número: " + numero + " - ");
+            if (numero % 2 == 0) {
+                System.out.println("Par");
+            } else {
+                System.out.println("Impar");
+                suma += numero;
+            }
+        }
+        System.out.println("Suma de impares: " + suma);
+    }
+}
