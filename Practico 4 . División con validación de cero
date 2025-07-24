@@ -1,0 +1,19 @@
+import java.util.Random;
+
+public class Ejercicio1a {
+    public static void main(String[] args) {
+        Random rand = new Random();
+        int a = rand.nextInt(100);
+        int b = rand.nextInt(100);
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+        if (b != 0) {
+            int cociente = a / b;
+            int resto = a % b;
+            System.out.println("Cociente: " + cociente);
+            System.out.println("Resto: " + resto);
+        } else {
+            System.out.println("Error: no se puede dividir entre cero.");
+        }
+    }
+}
