@@ -1,0 +1,14 @@
+import java.util.Random;
+
+public class Ejercicio1b {
+    public static void main(String[] args) {
+        Random rand = new Random();
+        int m = rand.nextInt(100) + 1;
+        System.out.println("m = " + m);
+        int suma = 0;
+        for (int i = 1; i <= m; i++) {
+            suma += i;
+        }
+        System.out.println("Suma de 1 a m: " + suma);
+    }
+}
