@@ -1,0 +1,73 @@
+// Archivo: Articulo.java
+public class Articulo {
+    protected double precioCosto;
+
+    public Articulo(double precioCosto) {
+        this.precioCosto = precioCosto;
+    }
+
+    public double getPrecioVenta() {
+        return precioCosto * 1.20;
+    }
+}
+// Archivo: Nacional.java
+public class Nacional extends Articulo {
+    private boolean subsidiado;
+    private String region;
+
+    public Nacional(double precioCosto, boolean subsidiado, String region) {
+        super(precioCosto);
+        this.subsidiado = subsidiado;
+        this.region = region;
+    }
+
+    @Override
+    public double getPrecioVenta() {
+        double precioBase = super.getPrecioVenta();
+        if (subsidiado) {
+            return precioBase;
+        } else {
+            if (region.equalsIgnoreCase("Interior")) {
+                return precioBase * 1.10;
+            } else if (region.equalsIgnoreCase("Montevideo")) {
+                return precioBase * 1.15;
+            }
+        }
+        return precioBase;
+    }
+}
+// Archivo: Importado.java
+public class Importado extends Articulo {
+    private double impuesto;
+    private int añoImportacion;
+
+    public Importado(double precioCosto, double impuesto, int añoImportacion) {
+        super(precioCosto);
+        this.impuesto = impuesto;
+        this.añoImportacion = añoImportacion;
+    }
+
+    @Override
+    public double getPrecioVenta() {
+        double precioBase = super.getPrecioVenta();
+        if (añoImportacion <= 2008) {
+            return precioBase + (impuesto * 0.80);
+        } else {
+            return precioBase + impuesto;
+        }
+    }
+}
+// Archivo: Main.java
+public class Main {
+    public static void main(String[] args) {
+        Nacional n1 = new Nacional(1000, true, "Interior");
+        Nacional n2 = new Nacional(1000, false, "Montevideo");
+        Importado i1 = new Importado(1000, 200, 2005);
+        Importado i2 = new Importado(1000, 200, 2015);
+
+        System.out.println("Nacional subsidiado (Interior): $" + n1.getPrecioVenta());
+        System.out.println("Nacional no subsidiado (Montevideo): $" + n2.getPrecioVenta());
+        System.out.println("Importado 2005: $" + i1.getPrecioVenta());
+        System.out.println("Importado 2015: $" + i2.getPrecioVenta());
+    }
+}
